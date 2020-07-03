@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  position: absolute;
+  overflow: hidden;
+  text-align: center;
+  background: #52bbc8;
+  color: #fff;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+.none {
+  display: none;
+  opacity: 0;
+}
+
+/* 菜单目录 */
+.music-menu{
+    position: absolute;
+    top: 50%;
+    text-align: center;
+}
+
+/* loading */
+.music-loading {
+  position: absolute;
+  transition: all 0.5s;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+}
+.music-loading--none {
+  opacity: 0;
+}
+.music-loading__mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.music-loading__content {
+  position: absolute;
+  z-index: 1001;
+  width: 75px;
+  height: 75px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.music-loading__item {
+  width: 11px;
+  height: 11px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  position: absolute;
+}
+.music-loading__item--top {
+  -webkit-animation: loading--top 3s linear infinite;
+  animation: loading--top 2s linear infinite;
+  top: 0px;
+  left: 30px;
+}
+@keyframes loading--top {
+  0% {
+    top: 0px;
+    left: 30px;
+  }
+  23.3% {
+    top: 60px;
+    left: 60px;
+  }
+  33.3% {
+    top: 60px;
+    left: 60px;
+  }
+  56.6% {
+    top: 60px;
+    left: 0px;
+  }
+  66.6% {
+    top: 60px;
+    left: 0px;
+  }
+  90% {
+    top: 0px;
+    left: 30px;
+  }
+  100% {
+    top: 0px;
+    left: 30px;
+  }
+}
+.music-loading__item--left {
+  -webkit-animation: loading--left 3s linear infinite;
+  animation: loading--left 2s linear infinite;
+  top: 60px;
+  left: 0px;
+}
+@keyframes loading--left {
+  0% {
+    top: 60px;
+    left: 0px;
+  }
+  23.3% {
+    top: 0px;
+    left: 30px;
+  }
+  33.3% {
+    top: 0px;
+    left: 30px;
+  }
+  56.6% {
+    top: 60px;
+    left: 60px;
+  }
+  66.6% {
+    top: 60px;
+    left: 60px;
+  }
+  90% {
+    top: 60px;
+    left: 0px;
+  }
+  100% {
+    top: 60px;
+    left: 0px;
+  }
+}
+.music-loading__item--right {
+  -webkit-animation: loading--right 3s linear infinite;
+  animation: loading--right 2s linear infinite;
+  top: 60px;
+  left: 60px;
+}
+@keyframes loading--right {
+  0% {
+    top: 60px;
+    left: 60px;
+  }
+  23.3% {
+    top: 60px;
+    left: 0px;
+  }
+  33.3% {
+    top: 60px;
+    left: 0px;
+  }
+  56.6% {
+    top: 0px;
+    left: 30px;
+  }
+  66.6% {
+    top: 0px;
+    left: 30px;
+  }
+  90% {
+    top: 60px;
+    left: 60px;
+  }
+  100% {
+    top: 60px;
+    left: 60px;
+  }
+}
