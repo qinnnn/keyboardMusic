@@ -32,7 +32,7 @@ function loadingResources() {
             //隐藏loading
             document.querySelector("#loading").className="music-loading music-loading--none";
             //显示菜单
-            document.querySelector("#menu").className="music-menu";
+            document.querySelector("#menu").className="music-menu music-menu--in";
         },
         ongoing: function (progress) {
             // console.log(progress)

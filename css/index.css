@@ -10,6 +10,12 @@ html {
   background: #52bbc8;
   color: #fff;
   font-family: "Microsoft YaHei", Arial, sans-serif;
+  font-size: 14px;
+  -moz-user-select:none; /*火狐*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    -ms-user-select:none; /*IE10*/
+    -khtml-user-select:none; /*早期浏览器*/
+    user-select:none;
 }
 body {
   width: 100vw;
@@ -23,8 +29,89 @@ body {
 /* 菜单目录 */
 .music-menu{
     position: absolute;
-    top: 50%;
-    text-align: center;
+    top: 40%;
+    width: 100%;
+    overflow: hidden;
+    display: none;
+}
+.music-menu--none{
+
+}
+.music-menu--in{
+  display: block;
+  -webkit-animation: menu--in .5s linear;
+  animation: menu--in .5s linear;
+}
+@keyframes menu--in {
+  0% {
+    top: 60%;
+    opacity: 0;
+  }
+  100% {
+    top: 40%;
+    opacity: 1;
+  }
+}
+.music-menu__start{
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  line-height: 25px;
+}
+.music-menu__start::before{
+  content: '';
+  transition: all .2s;
+  width: 0;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  background-color: #fff;
+}
+.music-menu__start:hover:before{
+  width: 100%;
+  left: 0;
+}
+.music-menu__about{
+  cursor: pointer;
+  margin-top: 5px;
+  position: relative;
+  display: inline-block;
+  line-height: 25px;
+}
+.music-menu__about::before{
+  content: '';
+  transition: all .2s;
+  width: 0;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  background-color: #fff;
+}
+.music-menu__about:hover:before{
+  width: 100%;
+  left: 0;
+}
+.music-menu__tag{
+  margin-top: 5px;
+  position: relative;
+  display: inline-block;
+  line-height: 25px;
+}
+.music-menu__tag::before{
+  content: '';
+  transition: all .2s;
+  width: 0;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  background-color: #fff;
+}
+.music-menu__tag:hover:before{
+  width: 100%;
+  left: 0;
 }
 
 /* loading */
@@ -62,7 +149,7 @@ body {
   position: absolute;
 }
 .music-loading__item--top {
-  -webkit-animation: loading--top 3s linear infinite;
+  -webkit-animation: loading--top 2s linear infinite;
   animation: loading--top 2s linear infinite;
   top: 0px;
   left: 30px;
@@ -98,7 +185,7 @@ body {
   }
 }
 .music-loading__item--left {
-  -webkit-animation: loading--left 3s linear infinite;
+  -webkit-animation: loading--left 2s linear infinite;
   animation: loading--left 2s linear infinite;
   top: 60px;
   left: 0px;
@@ -134,7 +221,7 @@ body {
   }
 }
 .music-loading__item--right {
-  -webkit-animation: loading--right 3s linear infinite;
+  -webkit-animation: loading--right 2s linear infinite;
   animation: loading--right 2s linear infinite;
   top: 60px;
   left: 60px;
