@@ -1,6 +1,11 @@
 //工具 组件
 
-export { Loading,MusicPlay }
+export { log,Loading,MusicPlay }
+
+//日志打印 （偷懒）
+function log(value){
+    console.log(value)
+}
 
 //数据加载工具
 class Loading {
