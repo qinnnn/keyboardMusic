@@ -23,10 +23,21 @@
             <div class="music-loading__item music-loading__item--right"></div>
         </div>
     </div>
-    <div class="music-menu music-menu--none" id="menu">
-        <a class="music-menu__start" onclick="startMusic()">`start开始`</a><br/>
-        <a class="music-menu__about">`关于`</a><br/>
+    <div class="music-menu" id="menu">
+        <a class="music-menu__start" id="start">`start开始`</a>
+        <br />
+        <a class="music-menu__about" id="about">`关于`</a>
+        <br />
         <p class="music-menu__tag">带上耳机，来弹奏属于自己的音乐！</p>
+    </div>
+    <div id="return" class="music-return">
+        <div id="return-buttom" class="music-return__content"><返回</div>
+        <div class="music-return-volume">
+            <div id="volume-icon" class="music-return-volume__icon music-return-volume__icon--open"></div>
+            <div class="music-return-volume__progress">
+                <div id="volume-choice" class="music-return-volume__choice"></div>
+            </div>
+        </div>
     </div>
 </body>
 

@@ -1,12 +1,12 @@
 //工具 组件
 
-export { Loading }
+export { Loading,MusicPlay }
 
 //数据加载工具
 class Loading {
     /**
-     * @param {*} options 
-     * data 示例数组: {img:[],music:[]}
+     * @param {*} options 对象
+     * data 示例对象: {img:[],music:[]}
      */
     constructor(options) {
         //当前进度
@@ -38,41 +38,86 @@ class Loading {
     }
     loadingImg() { //加载img
         let imageList = this.data.img || []
-        imageList.forEach((imgUrl) => {
+        imageList.forEach((imgUrl,key) => {
             if (imgUrl) {
                 let $img = new Image();
                 $img.src = imgUrl;
+                let item = {
+                    type: "img",
+                    value: $img,
+                    key: key
+                }
                 $img.onload = () => {
                     $img.onload = null;
                     this.count++;
                     this.progress = (this.count / this.loadingNum).toFixed(2);
                     if (this.count >= this.loadingNum) {
-                        this.completeCallBack && this.completeCallBack();
+                        this.completeCallBack && this.completeCallBack(item);
                     } else {
-                        this.ongoingCallBack && this.ongoingCallBack(this.progress);
+                        this.ongoingCallBack && this.ongoingCallBack(item,this.progress);
                     }
+                    $img = null; //销毁
                 };
             }
         });
     }
     loadingMusic() { //加载music
-        let musicList = this.data.music || []
-        musicList.forEach((musicUrl) => {
-            if (musicUrl) {
+        let musicList = this.data.music || {}
+        for(let musicUrl in musicList){
+            if (musicList[musicUrl]) {
                 let $music = new Audio();
-                $music.src = musicUrl;
-                $music.addEventListener("canplaythrough", () => {
+                $music.src = musicList[musicUrl];
+                let item = {
+                    type: "music",
+                    key: musicUrl,
+                    src: musicList[musicUrl]
+                }
+                $music.addEventListener("canplaythrough", () => { //音频加载
                     $music.removeEventListener("canplaythrough", () => { })
                     this.count++;
                     this.progress = (this.count / this.loadingNum).toFixed(2);
                     if (this.count >= this.loadingNum) {
-                        this.completeCallBack && this.completeCallBack();
+                        this.completeCallBack && this.completeCallBack(item);
                     } else {
-                        this.ongoingCallBack && this.ongoingCallBack(this.progress);
+                        this.ongoingCallBack && this.ongoingCallBack(item,this.progress);
                     }
+                    $music = null; //销毁
                 })
                 $music.load();
             }
-        });
+        }
     }
+}
+
+//根据键盘按键播放对应的音乐文件
+/**
+ * 
+ * @param {*} musicDataList 音乐对象列表
+ * @param {*} stateObject 音频设置对象
+ * @param {*} keyCode 触发的按键
+ * @param {*} shiftKey 是否有按住shift
+ */
+function MusicPlay(musicDataList,stateObject,keyCode,shiftKey = false){
+    return new Promise((resplve,reject)=>{
+        let key = "a"+keyCode
+        if(shiftKey){
+            key = "b"+keyCode
+        }
+        if(musicDataList[key]){
+            let newAudio = new Audio();
+            newAudio.muted = stateObject.silenceState; //是否静音
+            newAudio.volume = stateObject.musicVolume; //音量设置
+
+            newAudio.src = musicDataList[key].src; //设置播放的地址
+            newAudio.autoplay = true; //加载完成后立即播放
+            // newAudio.play(); //播放音频
+            newAudio.addEventListener("ended", () => { //音频播放完毕
+                newAudio.removeEventListener("ended", () => { })
+                newAudio = null; //销毁
+            })
+            resplve();
+        }else{
+            reject("无此音乐文件");
+        }
+    });
 }
