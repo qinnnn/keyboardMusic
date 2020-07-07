@@ -34,7 +34,8 @@ var $loading = document.querySelector("#loading"), // 加载控制
     $volumeIcon = document.querySelector("#volume-icon"), // 音量控制
     $return = document.querySelector("#return"), // 返回菜单控制
     $volumeArticle = document.querySelector("#volume-article"), // 音量进度
-    $volumeChoice = document.querySelector("#volume-choice") // 音量按钮 拖拽使用
+    $volumeChoice = document.querySelector("#volume-choice"), // 音量按钮
+    $volumeModel = document.querySelector("#volume-model") // 音量控件
 
 //初始化函数
 function init() {
@@ -80,10 +81,15 @@ function registrationEvents() {
     $returnButtom.addEventListener("click", () => endMusic())
     //声音图标
     $volumeIcon.addEventListener("click", () => updateVolume())
+    //声音图标显示声音进度
+    $volumeIcon.addEventListener("mouseover", () => {
+        $volumeModel.className = "music-return-model music-return-model--unfold"
+    })
+    $volumeIcon.addEventListener("mouseout", () => {
+        $volumeModel.className = "music-return-model"
+    })
     //音量进度点击
     $volumeArticle.addEventListener("click", (e) => clickVolume(e))
-    //音量拖拽事件
-    $volumeChoice.addEventListener("mousedown", (e) => mousedownVolumeChoice(e))
 }
 
 //开始
@@ -173,22 +179,5 @@ function clickVolume(e){
     }else{
         //修改图标
         $volumeIcon.className = "music-return-volume__icon music-return-volume__icon--close"
-    }
-}
-
-//拖拽事件
-function mousedownVolumeChoice(event){
-    let $event = event || window.event;
-    let a = $volumeArticle.clientLeft
-    log(a)
-    $volumeChoice.onmousemove = (moveEvent)=>{
-        let $moveEvent = moveEvent || window.event;
-        //修改音量进度
-        $volumeChoice.style.left = $moveEvent.clientX -  + "px"
-        log($moveEvent)
-    }
-    $volumeChoice.onmouseup = (upEvent)=>{
-        let $upEvent = upEvent || window.event;
-        log($upEvent)
     }
 }

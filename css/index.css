@@ -57,11 +57,21 @@ body {
   color: #fff;
   cursor: pointer;
 }
-.music-return-volume {
-  width: 200px;
+.music-return-model {
+  position: relative;
   overflow: hidden;
   margin-left: 20px;
   transition: all 0.5s;
+  width: 20px;
+  height: 19px;
+}
+.music-return-model--unfold{
+    width: 200px;
+}
+.music-return-volume {
+  width: 200px;
+  position: absolute;
+  left: 0;
 }
 .music-return-volume__icon {
   width: 18px;
@@ -101,7 +111,7 @@ body {
   position: absolute;
   top: -3px;
   left: 100px;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 .music-return-volume__choice:hover {
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
