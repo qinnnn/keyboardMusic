@@ -27,6 +27,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
+  min-width: 1366px;
 }
 
 .none {
@@ -406,4 +407,162 @@ body {
     top: 60px;
     left: 60px;
   }
+}
+
+/* 键盘控件 */ 
+.music-knock{
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 400px;
+    z-index: 10;
+    background-color: #efefef;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+}
+.music-knock-input{
+    width: 30%;
+}
+.music-knock-key{
+    width: 70%;
+}
+.music-knock-key__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+.music-knock-key__ul{
+    margin-top: 10px;
+    position: relative;
+}
+.music-knock-key__li{
+    list-style:none;
+    display: inline-block;
+    min-width: 28.8px;
+    height: 66.4px;
+    line-height: 66.4px;
+    font-size: 26.4px;
+    background: #fff;
+    margin: 0;
+    padding: 0 9px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px #d6d6d6;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #555;
+}
+.music-knock-key__ul .key1::before{
+    content: "1";
+}
+.music-knock-key__ul .key2::before{
+    content: "2";
+}
+.music-knock-key__ul .key3::before{
+    content: "3";
+}
+.music-knock-key__ul .key4::before{
+    content: "4";
+}
+.music-knock-key__ul .key5::before{
+    content: "5";
+}
+.music-knock-key__ul .key6::before{
+    content: "6";
+}
+.music-knock-key__ul .key7::before{
+    content: "7";
+}
+.music-knock-key__ul .key8::before{
+    content: "8";
+}
+.music-knock-key__ul .key9::before{
+    content: "9";
+}
+.music-knock-key__ul .key0::before{
+    content: "0";
+}
+.music-knock-key__ul .keyq::before{
+    content: "q";
+}
+.music-knock-key__ul .keyw::before{
+    content: "w";
+}
+.music-knock-key__ul .keye::before{
+    content: "e";
+}
+.music-knock-key__ul .keyr::before{
+    content: "r";
+}
+.music-knock-key__ul .keyt::before{
+    content: "t";
+}
+.music-knock-key__ul .keyy::before{
+    content: "y";
+}
+.music-knock-key__ul .keyu::before{
+    content: "u";
+}
+.music-knock-key__ul .keyi::before{
+    content: "i";
+}
+.music-knock-key__ul .keyo::before{
+    content: "o";
+}
+.music-knock-key__ul .keyp::before{
+    content: "p";
+}
+.music-knock-key__ul .keya::before{
+    content: "a";
+}
+.music-knock-key__ul .keys::before{
+    content: "s";
+}
+.music-knock-key__ul .keyd::before{
+    content: "d";
+}
+.music-knock-key__ul .keyf::before{
+    content: "f";
+}
+.music-knock-key__ul .keyg::before{
+    content: "g";
+}
+.music-knock-key__ul .keyh::before{
+    content: "h";
+}
+.music-knock-key__ul .keyj::before{
+    content: "j";
+}
+.music-knock-key__ul .keyk::before{
+    content: "k";
+}
+.music-knock-key__ul .keyl::before{
+    content: "l";
+}
+.music-knock-key__ul .keyz::before{
+    content: "z";
+}
+.music-knock-key__ul .keyx::before{
+    content: "x";
+}
+.music-knock-key__ul .keyc::before{
+    content: "c";
+}
+.music-knock-key__ul .keyv::before{
+    content: "v";
+}
+.music-knock-key__ul .keyb::before{
+    content: "b";
+}
+.music-knock-key__ul .keyn::before{
+    content: "n";
+}
+.music-knock-key__ul .keym::before{
+    content: "m";
 }

@@ -1,7 +1,8 @@
 import {
     log,
     Loading,
-    MusicPlay
+    MusicPlay,
+    KeyboardKnockDom
 } from './tool.js'
 import {
     imgSrc
@@ -24,6 +25,7 @@ var musicEventState = false; //音乐键盘事件状态
 var musicDataList = {}; //存一下加载完成的音乐对象
 var musicVolume = 1; //音量
 var silenceState = false; //是否静音
+var knockState = true; //播放音乐时右侧的键盘栏目
 
 //dom事件绑定
 var $loading = document.querySelector("#loading"), // 加载控制
@@ -123,13 +125,17 @@ function keyboardEvents() {
             if (now - lastTime > timer) { //节流处理
                 lastTime = now;
                 let stateObject = { //设置播放参数对象
-                    musicVolume: musicVolume,
-                    silenceState: silenceState
+                    musicVolume: musicVolume, //音量
+                    silenceState: silenceState //是否静音
                 }
                 //调用播放的方法
                 MusicPlay(musicDataList, stateObject, e.keyCode, e.shiftKey).then(
                     () => {
                         console.log("播放成功")
+                        //调用键盘敲击操作dom
+                        if(knockState){
+                            KeyboardKnockDom(e.keyCode,e.shiftKey)
+                        }
                     },
                     (err) => {
                         console.log("播放失败:", err)

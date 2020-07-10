@@ -1,6 +1,6 @@
 //工具 组件
 
-export { log,Loading,MusicPlay }
+export { log,Loading,MusicPlay,KeyboardKnockDom }
 
 //日志打印 （偷懒）
 function log(value){
@@ -125,4 +125,14 @@ function MusicPlay(musicDataList,stateObject,keyCode,shiftKey = false){
             reject("无此音乐文件");
         }
     });
+}
+
+//根据键盘按键操作对应dom
+/**
+ * 
+ * @param {*} keyCode 触发的按键
+ * @param {*} shiftKey 是否有按住shift
+ */
+function KeyboardKnockDom(keyCode,shiftKey = false){
+
 }
