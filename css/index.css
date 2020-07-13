@@ -439,7 +439,7 @@ body {
     margin-top: 10px;
     position: relative;
 }
-.music-knock-key__li{
+.music-knock-k__li{
     list-style:none;
     display: inline-block;
     min-width: 28.8px;
@@ -458,6 +458,10 @@ body {
     user-select: none;
     color: #555;
 }
+.music-knock-k__li--click{
+    background: #e8e8e8;
+}
+
 .music-knock-key__ul .key1::before{
     content: "1";
 }

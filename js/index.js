@@ -2,7 +2,9 @@ import {
     log,
     Loading,
     MusicPlay,
-    KeyboardKnockDom
+    KeyboardKnockDom,
+    LetterToKeyboard,
+    KeyboardToLetter,
 } from './tool.js'
 import {
     imgSrc
@@ -37,7 +39,8 @@ var $loading = document.querySelector("#loading"), // 加载控制
     $return = document.querySelector("#return"), // 返回菜单控制
     $volumeArticle = document.querySelector("#volume-article"), // 音量进度
     $volumeChoice = document.querySelector("#volume-choice"), // 音量按钮
-    $volumeModel = document.querySelector("#volume-model") // 音量控件
+    $volumeModel = document.querySelector("#volume-model"), // 音量控件
+    $musicKnockKeyLi = document.getElementsByClassName("music-knock-k__li") // 音量控件
 
 //初始化函数
 function init() {
@@ -92,6 +95,12 @@ function registrationEvents() {
     })
     //音量进度点击
     $volumeArticle.addEventListener("click", (e) => clickVolume(e))
+    //键盘控件点击
+    for(let i in $musicKnockKeyLi){
+        if(typeof $musicKnockKeyLi[i] == "object"){
+            $musicKnockKeyLi[i].addEventListener("click", (e) => clickMusicKnock(e))
+        }
+    }
 }
 
 //开始
@@ -121,9 +130,9 @@ function keyboardEvents() {
     document.onkeydown = function (e) {
         e = e || window.event;
         if (musicEventState) { //判断当前是否可以播放声音
-            let now = new Date().getTime();
-            if (now - lastTime > timer) { //节流处理
-                lastTime = now;
+            // let now = new Date().getTime();
+            // if (now - lastTime > timer) { //节流处理
+            //     lastTime = now;
                 let stateObject = { //设置播放参数对象
                     musicVolume: musicVolume, //音量
                     silenceState: silenceState //是否静音
@@ -141,7 +150,7 @@ function keyboardEvents() {
                         console.log("播放失败:", err)
                     },
                 )
-            }
+            // }
         }
     }
 }
@@ -186,4 +195,28 @@ function clickVolume(e){
         //修改图标
         $volumeIcon.className = "music-return-volume__icon music-return-volume__icon--close"
     }
+}
+
+//键盘控件点击
+function clickMusicKnock(e){
+    // console.log(e)
+    let key = e.target.className.split("key")[1]
+    // console.log(LetterToKeyboard(key))
+    let stateObject = { //设置播放参数对象
+        musicVolume: musicVolume, //音量
+        silenceState: silenceState //是否静音
+    }
+    e.target.className = "music-knock-k__li music-knock-k__li--click key"+key
+    setTimeout(()=>{
+        e.target.className = "music-knock-k__li key"+key
+    },200)
+    //调用播放的方法
+    MusicPlay(musicDataList, stateObject, LetterToKeyboard(key), false).then(
+        () => {
+            console.log("播放成功")
+        },
+        (err) => {
+            console.log("播放失败:", err)
+        },
+    )
 }
