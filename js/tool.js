@@ -1,16 +1,15 @@
 //工具 组件
 
-export { 
+export {
     log,
     Loading,
     MusicPlay,
-    KeyboardKnockDom,
     LetterToKeyboard,
     KeyboardToLetter,
 }
 
 //日志打印 （偷懒）
-function log(value){
+function log(value) {
     console.log(value)
 }
 
@@ -50,7 +49,7 @@ class Loading {
     }
     loadingImg() { //加载img
         let imageList = this.data.img || []
-        imageList.forEach((imgUrl,key) => {
+        imageList.forEach((imgUrl, key) => {
             if (imgUrl) {
                 let $img = new Image();
                 $img.src = imgUrl;
@@ -66,7 +65,7 @@ class Loading {
                     if (this.count >= this.loadingNum) {
                         this.completeCallBack && this.completeCallBack(item);
                     } else {
-                        this.ongoingCallBack && this.ongoingCallBack(item,this.progress);
+                        this.ongoingCallBack && this.ongoingCallBack(item, this.progress);
                     }
                     $img = null; //销毁
                 };
@@ -75,7 +74,7 @@ class Loading {
     }
     loadingMusic() { //加载music
         let musicList = this.data.music || {}
-        for(let musicUrl in musicList){
+        for (let musicUrl in musicList) {
             if (musicList[musicUrl]) {
                 let $music = new Audio();
                 $music.src = musicList[musicUrl];
@@ -91,7 +90,7 @@ class Loading {
                     if (this.count >= this.loadingNum) {
                         this.completeCallBack && this.completeCallBack(item);
                     } else {
-                        this.ongoingCallBack && this.ongoingCallBack(item,this.progress);
+                        this.ongoingCallBack && this.ongoingCallBack(item, this.progress);
                     }
                     $music = null; //销毁
                 })
@@ -109,13 +108,13 @@ class Loading {
  * @param {*} keyCode 触发的按键
  * @param {*} shiftKey 是否有按住shift
  */
-function MusicPlay(musicDataList,stateObject,keyCode,shiftKey = false){
-    return new Promise((resplve,reject)=>{
-        let key = "a"+keyCode
-        if(shiftKey){
-            key = "b"+keyCode
+function MusicPlay(musicDataList, stateObject, keyCode, shiftKey = false) {
+    return new Promise((resplve, reject) => {
+        let key = "a" + keyCode
+        if (shiftKey) {
+            key = "b" + keyCode
         }
-        if(musicDataList[key]){
+        if (musicDataList[key]) {
             let newAudio = new Audio();
             newAudio.muted = stateObject.silenceState; //是否静音
             newAudio.volume = stateObject.musicVolume; //音量设置
@@ -128,27 +127,17 @@ function MusicPlay(musicDataList,stateObject,keyCode,shiftKey = false){
                 newAudio = null; //销毁
             })
             resplve();
-        }else{
+        } else {
             reject("无此音乐文件");
         }
     });
-}
-
-//根据键盘按键操作对应dom
-/**
- * 
- * @param {*} keyCode 触发的按键
- * @param {*} shiftKey 是否有按住shift
- */
-function KeyboardKnockDom(keyCode,shiftKey = false){
-
 }
 
 /**
  * 键盘按键转字母
  * @param {*} keyCode 
  */
-function KeyboardToLetter(keyCode){
+function KeyboardToLetter(keyCode, shiftKey = false) {
     let obj = {
         "65": "A",
         "66": "B",
@@ -187,14 +176,21 @@ function KeyboardToLetter(keyCode){
         "56": "8",
         "57": "9",
     }
-    return obj[keyCode+""]
+    if (obj[keyCode + ""]) {
+        if (shiftKey) {
+            return obj[keyCode + ""]
+        } else {
+            return obj[keyCode + ""].toLowerCase()
+        }
+    }
+    return ""
 }
 
 /**
  * 字母转键盘按键
  * @param {*} keyCode 
  */
-function LetterToKeyboard(keyCode){
+function LetterToKeyboard(keyCode) {
     let obj = {
         "A": "65",
         "B": "66",

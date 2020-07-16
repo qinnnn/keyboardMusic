@@ -14,84 +14,89 @@
 </head>
 
 <body>
-    <div id="view" class="music-view"></div>
-    <div class="music-loading" id="loading">
-        <div class="music-loading__mask"></div>
-        <div class="music-loading__content">
-            <div class="music-loading__item music-loading__item--top"></div>
-            <div class="music-loading__item music-loading__item--left"></div>
-            <div class="music-loading__item music-loading__item--right"></div>
+    <div class="music-dom">
+        <div id="view" class="music-view"></div>
+        <div class="music-loading" id="loading">
+            <div class="music-loading__mask"></div>
+            <div class="music-loading__content">
+                <div class="music-loading__item music-loading__item--top"></div>
+                <div class="music-loading__item music-loading__item--left"></div>
+                <div class="music-loading__item music-loading__item--right"></div>
+            </div>
         </div>
-    </div>
-    <div class="music-menu" id="menu">
-        <a class="music-menu__start" id="start">`start开始`</a>
-        <br />
-        <a class="music-menu__about" id="about">`关于`</a>
-        <br />
-        <p class="music-menu__tag">带上耳机，来弹奏属于自己的音乐！</p>
-    </div>
-    <div id="return" class="music-return">
-        <div id="return-buttom" class="music-return__content">＜返回</div>
-        <div id="volume-model" class="music-return-model">
-            <div class="music-return-volume">
-                <div id="volume-icon" class="music-return-volume__icon music-return-volume__icon--open"></div>
-                <div class="music-return-volume__progress">
-                    <div id="volume-article" class="music-return-volume__article"></div>
-                    <div id="volume-choice" class="music-return-volume__choice"></div>
+        <div class="music-menu" id="menu">
+            <a class="music-menu__start" id="start">`start开始`</a>
+            <br />
+            <a class="music-menu__about" id="about">`关于`</a>
+            <br />
+            <p class="music-menu__tag">带上耳机，来弹奏属于自己的音乐！</p>
+        </div>
+        <div id="return" class="music-return">
+            <div id="return-buttom" class="music-return__content">＜返回</div>
+            <div id="volume-model" class="music-return-model">
+                <div class="music-return-volume">
+                    <div id="volume-icon" class="music-return-volume__icon music-return-volume__icon--open"></div>
+                    <div class="music-return-volume__progress">
+                        <div id="volume-article" class="music-return-volume__article"></div>
+                        <div id="volume-choice" class="music-return-volume__choice"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="knock" class="music-knock">
-        <div class="music-knock-input">
+        <div id="knock" class="music-knock music-knock--close">
+            <div id="knock-folding" class="music-knock__folding">展开</div>
+            <div class="music-knock-input">
+                <div id="knock-text" class="music-knock-text">
 
-        </div>
-        <div class="music-knock-key">
-            <div class="music-knock-key__content">
-                <ul class="music-knock-key__ul">
-                    <li class="music-knock-k__li key1"></li>
-                    <li class="music-knock-k__li key2"></li>
-                    <li class="music-knock-k__li key3"></li>
-                    <li class="music-knock-k__li key4"></li>
-                    <li class="music-knock-k__li key5"></li>
-                    <li class="music-knock-k__li key6"></li>
-                    <li class="music-knock-k__li key7"></li>
-                    <li class="music-knock-k__li key8"></li>
-                    <li class="music-knock-k__li key9"></li>
-                    <li class="music-knock-k__li key0"></li>
-                </ul>
-                <ul class="music-knock-key__ul">
-                    <li class="music-knock-k__li keyq"></li>
-                    <li class="music-knock-k__li keyw"></li>
-                    <li class="music-knock-k__li keye"></li>
-                    <li class="music-knock-k__li keyr"></li>
-                    <li class="music-knock-k__li keyt"></li>
-                    <li class="music-knock-k__li keyy"></li>
-                    <li class="music-knock-k__li keyu"></li>
-                    <li class="music-knock-k__li keyi"></li>
-                    <li class="music-knock-k__li keyo"></li>
-                    <li class="music-knock-k__li keyp"></li>
-                </ul>
-                <ul class="music-knock-key__ul">
-                    <li class="music-knock-k__li keya"></li>
-                    <li class="music-knock-k__li keys"></li>
-                    <li class="music-knock-k__li keyd"></li>
-                    <li class="music-knock-k__li keyf"></li>
-                    <li class="music-knock-k__li keyg"></li>
-                    <li class="music-knock-k__li keyh"></li>
-                    <li class="music-knock-k__li keyj"></li>
-                    <li class="music-knock-k__li keyk"></li>
-                    <li class="music-knock-k__li keyl"></li>
-                </ul>
-                <ul class="music-knock-key__ul">
-                    <li class="music-knock-k__li keyz"></li>
-                    <li class="music-knock-k__li keyx"></li>
-                    <li class="music-knock-k__li keyc"></li>
-                    <li class="music-knock-k__li keyv"></li>
-                    <li class="music-knock-k__li keyb"></li>
-                    <li class="music-knock-k__li keyn"></li>
-                    <li class="music-knock-k__li keym"></li>
-                </ul>
+                </div>
+            </div>
+            <div class="music-knock-key">
+                <div class="music-knock-key__content">
+                    <ul class="music-knock-key__ul">
+                        <li class="music-knock-k__li key1"></li>
+                        <li class="music-knock-k__li key2"></li>
+                        <li class="music-knock-k__li key3"></li>
+                        <li class="music-knock-k__li key4"></li>
+                        <li class="music-knock-k__li key5"></li>
+                        <li class="music-knock-k__li key6"></li>
+                        <li class="music-knock-k__li key7"></li>
+                        <li class="music-knock-k__li key8"></li>
+                        <li class="music-knock-k__li key9"></li>
+                        <li class="music-knock-k__li key0"></li>
+                    </ul>
+                    <ul class="music-knock-key__ul">
+                        <li class="music-knock-k__li keyq"></li>
+                        <li class="music-knock-k__li keyw"></li>
+                        <li class="music-knock-k__li keye"></li>
+                        <li class="music-knock-k__li keyr"></li>
+                        <li class="music-knock-k__li keyt"></li>
+                        <li class="music-knock-k__li keyy"></li>
+                        <li class="music-knock-k__li keyu"></li>
+                        <li class="music-knock-k__li keyi"></li>
+                        <li class="music-knock-k__li keyo"></li>
+                        <li class="music-knock-k__li keyp"></li>
+                    </ul>
+                    <ul class="music-knock-key__ul">
+                        <li class="music-knock-k__li keya"></li>
+                        <li class="music-knock-k__li keys"></li>
+                        <li class="music-knock-k__li keyd"></li>
+                        <li class="music-knock-k__li keyf"></li>
+                        <li class="music-knock-k__li keyg"></li>
+                        <li class="music-knock-k__li keyh"></li>
+                        <li class="music-knock-k__li keyj"></li>
+                        <li class="music-knock-k__li keyk"></li>
+                        <li class="music-knock-k__li keyl"></li>
+                    </ul>
+                    <ul class="music-knock-key__ul">
+                        <li class="music-knock-k__li keyz"></li>
+                        <li class="music-knock-k__li keyx"></li>
+                        <li class="music-knock-k__li keyc"></li>
+                        <li class="music-knock-k__li keyv"></li>
+                        <li class="music-knock-k__li keyb"></li>
+                        <li class="music-knock-k__li keyn"></li>
+                        <li class="music-knock-k__li keym"></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
