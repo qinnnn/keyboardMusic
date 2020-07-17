@@ -4,6 +4,7 @@ import {
     MusicPlay,
     LetterToKeyboard,
     KeyboardToLetter,
+    CreateCanvas,
 } from './tool.js'
 import {
     imgSrc
@@ -33,6 +34,7 @@ var pressKeyboardList = []; //记录当前按下的按键，目的:只触发一�
 
 //dom事件绑定
 var $loading = document.querySelector("#loading"), // 加载控制
+    $view = document.querySelector("#view"), // 画布存放地
     $menu = document.querySelector("#menu"), // 菜单控制
     $start = document.querySelector("#start"), //开始按钮
     $about = document.querySelector("#about"), //关于按钮
@@ -80,7 +82,7 @@ function loadingResources() {
 function canvasCreate() {
     let windowWidth = document.body.offsetWidth; //获取当前页面宽度
     let windowHeight = document.body.offsetHeight; //获取当前页面高度
-
+    canvasDom = CreateCanvas($view,windowWidth,windowHeight); //实例化画布对象
 }
 
 //注册一系列的点击事件
