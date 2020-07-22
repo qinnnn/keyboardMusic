@@ -241,16 +241,45 @@ class CreateCanvas {
      * @param {*} height 画布高度
      */
     canvas = null
-    constructor(view,width,height) {
-        this.canvas = view.createElement("canvas");
-        this.canvas.width = width;
-        this.canvas.height = height;
-        this.ctx = canvas.getContext('2d');
+    constructor(view, width, height) {
+        const app = new PIXI.Application({
+            width: width,
+            height: height,
+            antialias: true, //抗锯齿
+        });
+        app.renderer.backgroundColor = 0x052bbc8; //修改背景颜色
+        view.appendChild(app.view); //添加到dom上
+        PIXI.loader
+        .add("../keyboardMusic/image/cat.png")
+        .load(setup)
+        function setup(){
+            let cat = new PIXI.Sprite(PIXI.loader.resources["../keyboardMusic/image/cat.png"].texture)
+            app.stage.addChild(cat)
+            cat.visible = false;
+        }
+        // const graphics = new PIXI.Graphics();
+
+    }
+    knockCanvas(keyCode) {//根据键盘按键触发动画绘制
+        this.keyCode81()
+    }
+    keyCode81() { // q
+        let that = this
+        var Obj = function () {
+            this.draw = function () {
+                that.ctx.beginPath();
+                that.ctx.rect(10, 10, 20, 20);
+                that.ctx.fillStyle = 'rgba(#515123, 1)';
+                that.ctx.fill();
+            }
+        }
+        var obj = new Obj()
+        obj.draw()
     }
 }
 
 
-/** 
+/**
 var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d');
 

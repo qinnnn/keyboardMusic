@@ -82,7 +82,7 @@ function loadingResources() {
 function canvasCreate() {
     let windowWidth = document.body.offsetWidth; //获取当前页面宽度
     let windowHeight = document.body.offsetHeight; //获取当前页面高度
-    canvasDom = CreateCanvas($view,windowWidth,windowHeight); //实例化画布对象
+    canvasDom = new CreateCanvas($view,windowWidth,windowHeight); //实例化画布对象
 }
 
 //注册一系列的点击事件
@@ -154,6 +154,8 @@ function keyboardEvents() {
                 silenceState: silenceState //是否静音
             }
             if (e.keyCode != 16) {//过滤掉只按shift情况
+                //调用动画绘制
+                canvasDom.knockCanvas(e.keyCode)
                 //调用播放的方法
                 MusicPlay(musicDataList, stateObject, e.keyCode, e.shiftKey).then(
                     () => {
