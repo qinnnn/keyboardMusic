@@ -249,16 +249,14 @@ class CreateCanvas {
         });
         app.renderer.backgroundColor = 0x052bbc8; //修改背景颜色
         view.appendChild(app.view); //添加到dom上
-        PIXI.loader
-        .add("../keyboardMusic/image/cat.png")
-        .load(setup)
-        function setup(){
-            let cat = new PIXI.Sprite(PIXI.loader.resources["../keyboardMusic/image/cat.png"].texture)
-            app.stage.addChild(cat)
-            cat.visible = false;
-        }
-        // const graphics = new PIXI.Graphics();
-
+        let rectangle = new PIXI.Graphics();
+        rectangle.beginFill(0x66CCFF);
+        rectangle.drawRect(0, 0, 64, 64);
+        rectangle.endFill();
+        rectangle.x = 170;
+        rectangle.y = 170;
+        app.stage.addChild(rectangle);
+        TweenMax.to(rectangle, 3, {x:200, y:100});
     }
     knockCanvas(keyCode) {//根据键盘按键触发动画绘制
         this.keyCode81()
