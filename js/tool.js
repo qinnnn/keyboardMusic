@@ -240,144 +240,64 @@ class CreateCanvas {
      * @param {*} width 画布宽度
      * @param {*} height 画布高度
      */
-    canvas = null
+    app = null
+    width = 0
+    height = 0
     constructor(view, width, height) {
-        const app = new PIXI.Application({
+        this.width = width
+        this.height = height
+        this.app = new PIXI.Application({
             width: width,
             height: height,
             antialias: true, //抗锯齿
         });
-        app.renderer.backgroundColor = 0x052bbc8; //修改背景颜色
-        view.appendChild(app.view); //添加到dom上
-        let rectangle = new PIXI.Graphics();
-        rectangle.beginFill(0x66CCFF);
-        rectangle.drawRect(0, 0, 64, 64);
-        rectangle.endFill();
-        rectangle.x = 170;
-        rectangle.y = 170;
-        app.stage.addChild(rectangle);
-        TweenMax.to(rectangle, 3, {x:200, y:100});
+        this.app.renderer.backgroundColor = 0x052bbc8; //修改背景颜色
+        view.appendChild(this.app.view); //添加到dom上
     }
     knockCanvas(keyCode) {//根据键盘按键触发动画绘制
         this.keyCode81()
     }
+    createRandom(min = 0, max = 1,decimal = 0){ //随机数创建 min最小数 max最大数 decimal小数位数
+       let random = Math.random() * ( max - min + 1 ) + min;
+        return parseInt(random.toFixed(decimal))
+    }
+    createColor(){ //随机返回颜色
+        return '0x'+(Math.random()*0xffffff<<0).toString(16); 
+    }
     keyCode81() { // q
-        let that = this
-        var Obj = function () {
-            this.draw = function () {
-                that.ctx.beginPath();
-                that.ctx.rect(10, 10, 20, 20);
-                that.ctx.fillStyle = 'rgba(#515123, 1)';
-                that.ctx.fill();
-            }
+        // let rectangle = new PIXI.Graphics();
+        // rectangle.x = this.width/2;
+        // rectangle.y = this.height/2;
+        // rectangle.beginFill(0x66CCFF,1);
+        // rectangle.drawCircle(0, 0, 64);
+        // rectangle.alpha = 0
+        // rectangle.endFill();
+        // this.app.stage.addChild(rectangle);
+        // TweenMax.fromTo(rectangle, 3,{alpha:0}, {alpha:1,onComplete:()=>{
+        //     TweenMax.to(rectangle, 3,  {alpha:0,x:200, y:100,onComplete:()=>{
+        //         this.app.stage.removeChild(rectangle)
+        //     }});
+            
+        // }});
+        let color = this.createColor()
+        let circleList = []
+        let circleNum = this.createRandom(40,45)
+        let initAngle = this.createRandom(60,80)
+        let initAngle2 = this.createRandom(0,10)
+        let size = this.createRandom(4,6)
+        for(let i=0;i<circleNum;i++){
+            let rectangle = new PIXI.Graphics();
+            rectangle.x = this.width/2;
+            rectangle.y = this.height/2;
+            rectangle.beginFill(color);
+            rectangle.drawCircle(i*14, 0, size);
+            rectangle.rotation = (((i*23)+initAngle)*Math.PI/180)+initAngle2;
+            this.app.stage.addChild(rectangle);
+            TweenMax.fromTo(rectangle, 0.5,{alpha:0,width:0,height:0}, {alpha:1,width:size+(i*0.2),height:size+(i*0.2),delay:i*0.03,onComplete:()=>{
+                TweenMax.to(rectangle, 0.5,  {delay:1.5,alpha:0,width:0, height:0,onComplete:()=>{
+                    this.app.stage.removeChild(rectangle)
+                }});
+            }});
         }
-        var obj = new Obj()
-        obj.draw()
     }
 }
-
-
-/**
-var canvas = document.getElementById('canvas'),
-    ctx = canvas.getContext('2d');
-
-// Set to size of browser
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-var centerX = canvas.width / 2,
-    centerY = canvas.height / 2;
-
-var squares = [],
-    colors = ['242, 56, 90', '245, 165, 3', '74, 217, 217', '54, 177, 191'],
-    totalSquares = randomNumber(190, 230);
-
-
-for (var i = 0; i < totalSquares; i++) {
-
-    var p = Math.random(),
-        x = centerX,
-        y = centerY;
-
-    var square = new Square(x, y, colors[Math.floor(i % colors.length)], randomNumber(3, 14), randomNumber(0.5, 1));
-
-    square.innerX = x;
-    square.innerY = y;
-
-    squares.push(square);
-}
-
-// Draw squares
-function Square(x, y, color, size, alpha) {
-
-    var _this = this;
-
-    _this.x = x || null;
-    _this.y = y || null;
-    _this.color = color || null;
-    _this.size = size || null;
-    _this.alpha = alpha || null;
-
-    this.draw = function(ctx) {
-        ctx.beginPath();
-        ctx.rect(_this.x, _this.y, _this.size, _this.size);
-        ctx.fillStyle = 'rgba(' + _this.color + ', ' + _this.alpha + ')';
-        ctx.fill();
-    }
-
-}
-
-function loop() {
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (var i = 0; i < squares.length; i++) {
-        squares[i].draw(ctx);
-    }
-
-    requestAnimationFrame(loop);
-}
-
-loop();
-
-function randomNumber(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-var longestReturnDuration = 0,
-    returnDuration = 0;
-
-function tweenSquares(square) {
-
-    returnDuration = 1.5 + Math.random();
-
-    // Keep longest duration to use for delay
-    if (returnDuration > longestReturnDuration) {
-        longestReturnDuration = returnDuration;
-    }
-
-    TweenMax.to(square, 0.7 + Math.random(), {
-        x: randomNumber(0, canvas.width),
-        y: randomNumber(0, canvas.height),
-        width: 20,
-        delay: longestReturnDuration + 1,
-        ease: Cubic.easeInOut,
-        onComplete: function() {
-
-            TweenMax.to(square, longestReturnDuration, {
-                x: centerX,
-                y: centerY,
-                width: 5,
-                ease: Cubic.easeInOut,
-                onComplete: function() {
-                    tweenSquares(square);
-                }
-            })
-        }
-    });
-}
-
-for (var i = 0; i < squares.length; i++) {
-    tweenSquares(squares[i]);
-}
-**/
