@@ -168,11 +168,11 @@ function keyboardEvents() {
             }
             //调用键盘敲击操作dom
             let key = KeyboardToLetter(e.keyCode, e.shiftKey)
+            //记录键盘敲击按键
+            recordKeyboard(key)
             if (knockState) {
                 keyboardKnockDom(key, e.shiftKey)
             }
-            //记录键盘敲击按键
-            recordKeyboard(key)
         }
     }
     //键盘松开
@@ -234,10 +234,12 @@ function keyboardKnockDom(key, shiftKey) {
     let knockDom = document.getElementsByClassName("music-knock-k__li key" + key)
     if (knockDom.length != 0) {
         for (let i in knockDom) {
-            knockDom[i].className = "music-knock-k__li music-knock-k__li--click key" + key
-            setTimeout(() => {
-                knockDom[i].className = "music-knock-k__li key" + key
-            }, 200)
+            if(knockDom[i]){
+                knockDom[i].className = ("music-knock-k__li music-knock-k__li--click key" + key).toString()
+                setTimeout(() => {
+                    knockDom[i].className = "music-knock-k__li key" + key
+                }, 200)
+            }
         }
     }
 }
